@@ -17,6 +17,8 @@ function randomInteger(min, max) {
 let max = 100
 //...................................................................
 let min = 1
+//...................................................................
+let guessCount = 1
 
 
 start();
@@ -26,12 +28,12 @@ async function start() {
   let secretNumber = await ask('\nWhat is your secret number?' + "\n\nI won't peek, I promise..." + '\n\nEnter a number between 1-100 and "Press" Enter.\n\n');
   console.log('\nYou entered: ' + secretNumber + '');
   let guess = randomInteger(min, max)
-  let firstGuess = await ask('\nIs it...' + guess + ' ?' + " Yes, or No: ")
+  let firstGuess = await ask('\nIs it...' + guess + '?' + " Yes, or No: ")
 
   if (firstGuess === "N" || firstGuess === "No" || firstGuess === "NO" || firstGuess === "no" || firstGuess === "n") {
     console.log("\nLet me try again")
   } else {
-    console.log("\nYour number was " + secretNumber + "!")
+    console.log("\nYour number was " + secretNumber + "!" + '\n\n"No matter how dark the night, the morning always comes" - Lulu Final Fantasy X.\n\nI guessed  first try')
     process.exit()
   }
 
@@ -41,16 +43,18 @@ async function start() {
     if (secondGuess === "Higher" || secondGuess === "higher" || secondGuess === "High" || secondGuess === "high" || secondGuess === "H" || secondGuess === "h" || secondGuess === ">" || secondGuess === "+") {
       min = guess
       guess = randomInteger(min, max)
-      firstGuess = await ask('\nIs it...' + guess + ' ?' + " Yes, or No: ")
+      firstGuess = await ask('\nIs it...' + guess + '?' + " Yes, or No: ")
+      guessCount += 1;
     } else if (secondGuess === "Lower" || secondGuess === "lower" || secondGuess === "Low" || secondGuess === "low" || secondGuess === "L" || secondGuess === "l" || secondGuess === "<" || secondGuess === "-") {
       max = guess
       guess = randomInteger(min, max)
-      firstGuess = await ask('\nIs it...' + guess + ' ?' + "Yes, or No: ")
+      firstGuess = await ask('\nIs it...' + guess + '?' + "Yes, or No: ")
+      guessCount += 1;
     }
     if (firstGuess === "N" || firstGuess === "No" || firstGuess === "NO" || firstGuess === "no" || firstGuess === "n") {
       console.log('\nLet me try again')
     } else {
-      console.log("\nYour number was " + secretNumber + "!")
+      console.log("\nYour number was " + secretNumber + "!" + "\n\nI guessed it in " + guessCount + " tries")
       process.exit()
     }
   }
