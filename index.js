@@ -30,10 +30,7 @@ async function start() {
   let guess = randomInteger(min, max)
   let firstGuess = await ask('\nIs it...' + guess + '?' + " Yes, or No: ")
 
-while (isNaN(firstGuess)) {
-  console.log('Invalid Input' + 'Please Type "Yes" or "No"')
-  return start()
-}
+  
   if (firstGuess === "N" || firstGuess === "No" || firstGuess === "NO" || firstGuess === "no" || firstGuess === "n") {
     console.log("\nLet me try again")
   } if (firstGuess === "Y" || firstGuess === "Yes" || firstGuess === "YES" || firstGuess === "yes" || firstGuess === "y") {
